@@ -14,12 +14,27 @@ import (
 	"github.com/prophittcorey/yeppeun"
 )
 
+type route struct {
+	Path    string
+	Handler http.HandlerFunc
+}
+
+type routecollection []route
+
+func (rs *routecollection) register(r route) {
+	*rs = append(*rs, r)
+}
+
 // ListenAndServce begins listening and responding to web requests. This
 // function blocks.
 func ListenAndServe() error {
 	log.SetFlags(log.Flags() &^ (log.Ldate | log.Ltime))
 
 	mux := http.NewServeMux()
+
+	for _, r := range routes {
+		mux.HandleFunc(r.Path, r.Handler)
+	}
 
 	srv := &http.Server{
 		Addr:              fmt.Sprintf("%s:%s", os.Getenv("HOST"), os.Getenv("PORT")),
@@ -67,6 +82,7 @@ func ListenAndServe() error {
 
 var (
 	templates *template.Template
+	routes    = routecollection{}
 )
 
 func setdefault(key, value string) {
