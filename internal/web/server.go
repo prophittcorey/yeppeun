@@ -104,7 +104,7 @@ func init() {
 
 	templates = template.New("").Funcs(template.FuncMap{})
 
-	if _, err := templates.ParseFS(yeppeun.VFS, tmpls...); err != nil {
+	if _, err := templates.ParseFS(yeppeun.FS, tmpls...); err != nil {
 		log.Fatal(err)
 	}
 }

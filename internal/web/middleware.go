@@ -2,21 +2,37 @@ package web
 
 import (
 	"log"
+	"net"
 	"net/http"
+	"strings"
 	"time"
 )
 
-func logger(h http.HandlerFunc) func(w http.ResponseWriter, r *http.Request) {
-	getIP := func(r *http.Request) string {
-		remoteIP := r.RemoteAddr
+func getIP(r *http.Request) string {
+	remoteIP := r.RemoteAddr
 
-		if forwarded := r.Header["X-Forwarded-For"]; len(forwarded) != 0 {
-			remoteIP = forwarded[len(forwarded)-1]
-		}
-
-		return remoteIP
+	if forwarded := r.Header["X-Forwarded-For"]; len(forwarded) != 0 {
+		remoteIP = forwarded[0]
 	}
 
+	host, _, err := net.SplitHostPort(remoteIP)
+
+	if err == nil {
+		remoteIP = host
+	}
+
+	if strings.Contains(remoteIP, ",") {
+		parts := strings.Split(remoteIP, ",")
+
+		if len(parts) > 0 {
+			return strings.TrimSpace(parts[0])
+		}
+	}
+
+	return remoteIP
+}
+
+func logger(h http.HandlerFunc) func(w http.ResponseWriter, r *http.Request) {
 	return func(w http.ResponseWriter, r *http.Request) {
 		ip := getIP(r)
 		now := time.Now()
