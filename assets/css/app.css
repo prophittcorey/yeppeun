@@ -1,0 +1,14 @@
+/*
+ *
+ * app.css: make it yeppeun
+ *
+ */
+
+:root {
+  font-size: 18px;
+}
+
+html,
+body {
+  font-family: mono;
+}

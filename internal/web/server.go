@@ -100,9 +100,14 @@ func init() {
 
 	tmpls := []string{
 		"templates/pages/*.tmpl",
+		"templates/partials/*.tmpl",
 	}
 
-	templates = template.New("").Funcs(template.FuncMap{})
+	templates = template.New("").Funcs(template.FuncMap{
+		"ran_at": func() int64 {
+			return yeppeun.RanAt
+		},
+	})
 
 	if _, err := templates.ParseFS(yeppeun.FS, tmpls...); err != nil {
 		log.Fatal(err)
