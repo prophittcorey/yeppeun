@@ -1,7 +1,6 @@
 package web
 
 import (
-	"fmt"
 	"log"
 	"net/http"
 )
@@ -15,7 +14,13 @@ func init() {
 		Handler: logger(func(w http.ResponseWriter, r *http.Request) {
 			switch r.Method {
 			case "POST":
-				fmt.Fprintf(w, "Looks like you posted!")
+				err := templates.ExecuteTemplate(w, "pages/pretty.tmpl", map[string]interface{}{
+					"Pretty": r.FormValue("dirty-json"),
+				})
+
+				if err != nil {
+					log.Printf("web: error rendering pretty page; %s", err)
+				}
 			case "GET":
 				if r.URL.Path != "/" {
 					// NOTE: This is the catch all code path. We could do things here like
@@ -23,11 +28,7 @@ func init() {
 
 					http.NotFound(w, r)
 				} else {
-					err := templates.ExecuteTemplate(w, "pages/index.tmpl", map[string]interface{}{
-						"Path": r.URL.Path,
-					})
-
-					if err != nil {
+					if err := templates.ExecuteTemplate(w, "pages/index.tmpl", nil); err != nil {
 						log.Printf("web: error rendering index page; %s", err)
 					}
 				}
