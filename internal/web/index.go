@@ -24,7 +24,7 @@ func init() {
 					}
 				}
 
-				err := templates.ExecuteTemplate(w, "pages/pretty.tmpl", map[string]interface{}{
+				err := templates.ExecuteTemplate(w, "pages/index.tmpl", map[string]interface{}{
 					"Pretty": string(cleaned),
 				})
 
