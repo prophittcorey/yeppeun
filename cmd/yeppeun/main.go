@@ -2,6 +2,7 @@ package main
 
 import (
 	"flag"
+	"io"
 	"log"
 	"os"
 
@@ -12,6 +13,22 @@ func setenv(key, value string) {
 	if err := os.Setenv(key, value); err != nil {
 		log.Printf("yeppeun: failed to set a default environment variable; %s", err)
 	}
+}
+
+func hasBytesToRead() bool {
+	file := os.Stdin
+
+	fi, err := file.Stat()
+
+	if err != nil {
+		return false
+	}
+
+	if fi.Mode()&os.ModeNamedPipe == 0 {
+		return false
+	}
+
+	return true
 }
 
 func main() {
@@ -31,6 +48,16 @@ func main() {
 
 	if help {
 		flag.Usage()
+		return
+	}
+
+	if hasBytesToRead() {
+		/* TODO: Need to beautify the input... */
+
+		if _, err := io.Copy(os.Stdout, os.Stdin); err != nil {
+			log.Fatal(err)
+		}
+
 		return
 	}
 
