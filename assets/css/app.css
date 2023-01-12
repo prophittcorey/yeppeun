@@ -6,9 +6,29 @@
 
 :root {
   font-size: 18px;
+
+  --black: #131313;
+  --gray: #eee;
 }
 
 html,
 body {
   font-family: mono;
+  color: var(--black);
+}
+
+body > main {
+  max-width: 1280px;
+  margin: 0 auto;
+}
+
+main > header {
+  display: flex;
+  border-bottom: 1px solid var(--gray);
+  margin-bottom: 2rem;
+}
+
+header > img {
+  align-self: center;
+  margin-right: .5rem;
 }

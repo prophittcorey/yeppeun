@@ -7,19 +7,22 @@
   </head>
 
   <body>
-    <header>
-    </header>
+    <main>
+      <header><img src="/assets/images/logo.png" width="50"> <h1>Yeppeun</h1></header>
 
-    <form action="/" method="POST">
-      <textarea name="dirty-json"></textarea>
+      <!-- the actual input form -->
+      <form action="/" method="POST">
+        <textarea name="dirty-json">{{ .Ugly }}</textarea>
 
-      <input type="submit" value="Submit">
-    </form>
+        <input type="submit" value="Submit">
+      </form>
 
-    {{ if .Pretty }}
-      <hr>
-      <pre><code>{{ .Pretty }}</code></pre>
-    {{ end }}
+      <!-- if cleaned json is available, it will be printed below -->
+      {{ if .Pretty }}
+        <hr>
+        <pre><code>{{ .Pretty }}</code></pre>
+      {{ end }}
+    </main>
   </body>
 </html>
 {{ end }}

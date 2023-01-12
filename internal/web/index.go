@@ -25,6 +25,7 @@ func init() {
 				}
 
 				err := templates.ExecuteTemplate(w, "pages/index.tmpl", map[string]interface{}{
+					"Ugly":   r.FormValue("dirty-json"),
 					"Pretty": string(cleaned),
 				})
 
