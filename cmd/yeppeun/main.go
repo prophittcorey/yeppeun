@@ -1,7 +1,9 @@
 package main
 
 import (
+	"encoding/json"
 	"flag"
+	"fmt"
 	"io"
 	"log"
 	"os"
@@ -52,10 +54,14 @@ func main() {
 	}
 
 	if hasBytesToRead() {
-		/* TODO: Need to beautify the input... */
+		if bs, err := io.ReadAll(os.Stdin); err == nil {
+			var data any
 
-		if _, err := io.Copy(os.Stdout, os.Stdin); err != nil {
-			log.Fatal(err)
+			if err = json.Unmarshal(bs, &data); err == nil {
+				if bs, err = json.MarshalIndent(data, "", "  "); err == nil {
+					fmt.Println(string(bs))
+				}
+			}
 		}
 
 		return
