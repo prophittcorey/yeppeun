@@ -9,6 +9,7 @@
 
   --black: #131313;
   --gray: #eee;
+  --pink: #d32b74;
 }
 
 html,
@@ -20,6 +21,18 @@ body {
 body > main {
   max-width: 1280px;
   margin: 0 auto;
+}
+
+textarea {
+  background: var(--gray);
+  border: none;
+  width: 100%;
+  min-height: 350px;
+  resize: none;
+}
+
+textarea:focus {
+  outline: 1px solid var(--pink);
 }
 
 main > header {
