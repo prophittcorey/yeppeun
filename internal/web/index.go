@@ -1,6 +1,7 @@
 package web
 
 import (
+	"encoding/json"
 	"log"
 	"net/http"
 )
@@ -14,8 +15,17 @@ func init() {
 		Handler: logger(func(w http.ResponseWriter, r *http.Request) {
 			switch r.Method {
 			case "POST":
+				var data any
+				var cleaned []byte
+
+				if err := json.Unmarshal([]byte(r.FormValue("dirty-json")), &data); err == nil {
+					if bs, err := json.MarshalIndent(data, "", "  "); err == nil {
+						cleaned = bs
+					}
+				}
+
 				err := templates.ExecuteTemplate(w, "pages/pretty.tmpl", map[string]interface{}{
-					"Pretty": r.FormValue("dirty-json"),
+					"Pretty": string(cleaned),
 				})
 
 				if err != nil {
