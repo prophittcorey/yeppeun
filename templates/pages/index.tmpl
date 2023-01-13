@@ -20,9 +20,11 @@
       <!-- if cleaned json is available, it will be printed below -->
       {{ if .Pretty }}
         <hr>
-        <pre><code>{{ .Pretty }}</code></pre>
+        <pre><code class="language-js">{{ .Pretty }}</code></pre>
       {{ end }}
     </main>
+
+    <script src="/assets/js/prism.js?v={{ ran_at }}"></script>
   </body>
 </html>
 {{ end }}
