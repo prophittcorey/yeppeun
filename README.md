@@ -9,7 +9,7 @@ A command line tool with an optional web interface for pretty printing JSON.
 ## Installation
 
 ```bash
-go install github.com/prophittcorey/yeppeun@latest
+go install github.com/prophittcorey/yeppeun/cmd/yeppeun@latest
 ```
 
 ## Usage
