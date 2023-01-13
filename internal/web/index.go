@@ -18,14 +18,14 @@ func init() {
 				var data any
 				var cleaned []byte
 
-				if err := json.Unmarshal([]byte(r.FormValue("dirty-json")), &data); err == nil {
+				if err := json.Unmarshal([]byte(r.FormValue("ugly")), &data); err == nil {
 					if bs, err := json.MarshalIndent(data, "", "  "); err == nil {
 						cleaned = bs
 					}
 				}
 
 				err := templates.ExecuteTemplate(w, "pages/index.tmpl", map[string]interface{}{
-					"Ugly":   r.FormValue("dirty-json"),
+					"Ugly":   r.FormValue("ugly"),
 					"Pretty": string(cleaned),
 				})
 
