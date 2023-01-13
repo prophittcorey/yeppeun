@@ -7,6 +7,8 @@
 :root {
   font-size: 18px;
 
+  --ff: Consolas, Monaco, "Andale Mono", "Ubuntu Mono", monospace;
+
   --black: #131313;
   --gray: #eee;
   --pink: #d32b74;
@@ -14,25 +16,42 @@
 
 html,
 body {
-  font-family: mono;
+  margin: 0;
+  padding: 0;
+  font-family: var(--ff);
+  font-size: 100%;
   color: var(--black);
+  vertical-align: baseline;
+}
+
+* {
+  box-sizing: border-box;
 }
 
 body > main {
   max-width: 1280px;
   margin: 0 auto;
+  line-height: 1;
 }
 
 textarea {
+  font-family: inherit;
+  font-size: inherit;
   background: var(--gray);
   border: none;
   width: 100%;
   min-height: 350px;
   resize: none;
+  padding: 1em;
+  border-radius: .3em;
 }
 
 textarea:focus {
   outline: 1px solid var(--pink);
+}
+
+main {
+  display: block;
 }
 
 main > header {
