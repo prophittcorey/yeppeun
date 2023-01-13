@@ -2,7 +2,8 @@
 
 [![Go Reference](https://pkg.go.dev/badge/github.com/prophittcorey/yeppeun.svg)](https://pkg.go.dev/github.com/prophittcorey/yeppeun)
 
-A command line tool with an optional web interface for pretty printing JSON.
+A self-hostable, single binary command line tool and web interface for
+pretty printing JSON.
 
 ![A screenshot demonstrating Yeppeun running in a browser.](.github/screenshot.png)
 
@@ -20,7 +21,8 @@ The command line tool can be use via pipes.
 cat /tmp/dirty.json | yeppeun # outputs pretty json
 ```
 
-The web interface can be started by running the executable.
+The web interface can be started by running the executable itself. You can
+optionally pass a host and/or port.
 
 ```bash
 yeppeun --host 0.0.0.0 --port 1234
