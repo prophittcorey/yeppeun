@@ -12,6 +12,8 @@
   --black: #131313;
   --gray: #eee;
   --pink: #d32b74;
+  --pink-darker: #c31b64;
+  --pink-darkest: #a30b54;
 }
 
 html,
@@ -63,4 +65,37 @@ main > header {
 header > img {
   align-self: center;
   margin-right: .5rem;
+}
+
+hr {
+  padding: 0;
+  margin: 0;
+  outline: none;
+  border: none;
+  background: var(--gray);
+  margin-bottom: 1rem;
+  height: 1px;
+}
+
+form > input[type="submit"] {
+  margin: 1rem 0;
+}
+
+input[type="submit"] {
+  padding: 6px 12px;
+  border: 1px solid transparent;
+  outline: none;
+  border-radius: .3em;
+  color: #fff;
+  background-color: var(--pink);
+  cursor: pointer;
+  font-weight: 600;
+}
+
+input[type="submit"]:hover {
+  background-color: var(--pink-darker);
+}
+
+input[type="submit"]:focus {
+  background-color: var(--pink-darkest);
 }
