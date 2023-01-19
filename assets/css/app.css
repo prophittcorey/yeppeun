@@ -99,3 +99,24 @@ input[type="submit"]:hover {
 input[type="submit"]:focus {
   background-color: var(--pink-darkest);
 }
+
+pre {
+  position: relative;
+}
+
+pre > .copy {
+  display: block;
+  position: absolute;
+  top: .5em;
+  right: .5em;
+}
+
+pre > .copy > svg {
+  width: 1.25em;
+  height: 1.25em;
+  transition: all 300ms ease-in-out;
+}
+
+pre > .copy > svg:hover {
+  cursor: pointer;
+}
