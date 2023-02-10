@@ -26,11 +26,8 @@ func hasBytesToRead() bool {
 		return false
 	}
 
-	if fi.Mode()&os.ModeNamedPipe == 0 {
-		return false
-	}
-
-	return true
+	// Does it have data?
+	return fi.Size() > 0
 }
 
 func main() {
